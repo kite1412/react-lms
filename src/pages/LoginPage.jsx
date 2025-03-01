@@ -1,7 +1,7 @@
 function LoginPage() {
   return (
-    <div>
-
+    <div className="text-white">
+      Login page
     </div>
   );
 }
