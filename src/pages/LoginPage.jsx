@@ -63,7 +63,7 @@ function LoginPage() {
 
           <button 
             className={`
-              bg-[#0A376E] text-white w-full py-1 rounded-4xl hover:cursor-pointer mt-4
+              bg-midnightBlue text-white w-full py-1 rounded-4xl hover:cursor-pointer mt-4
               ${buttonDisabled ? "opacity-70" : "opacity-100"}
             `}
             onClick={() => {

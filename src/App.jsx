@@ -1,7 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./routes/ProtectedRoute";
-import HomePage from "./pages/HomePage";
-import { AuthProvider, useAuth } from "./contexts/AuthContext";
+import MainPage from "./pages/MainPage";
+import { AuthProvider } from "./contexts/AuthContext";
 import LoginPage from "./pages/LoginPage";
 import { USERNAME } from "./constants/auth";
 
@@ -16,7 +16,7 @@ function App() {
             isAuthenticated ? <Navigate to={"/"} replace /> : <LoginPage />
           } />
           <Route element={<ProtectedRoute />}>
-            <Route index element={<HomePage />} />
+            <Route index element={<MainPage />} />
           </Route>
         </Routes>
       } />
