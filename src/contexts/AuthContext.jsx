@@ -1,6 +1,7 @@
 import { createContext, useContext, ReactNode, JSX, useState } from "react";
-import MockUserService from "../services/user/MockUserService";
+import { userService } from "../objects";
 import { USERNAME } from "../constants/auth";
+import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext({
   isAuthenticated: false,
@@ -15,20 +16,30 @@ const AuthContext = createContext({
  * @returns {JSX.Element}
  */
 export function AuthProvider({children}) {
-  const userService = new MockUserService();
   const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem(USERNAME));
+  const navigate = useNavigate();
+  const navigateHome = () => {
+    navigate("/", { replace: true });    
+  };
 
   const login = (username, password) => {
-    if (userService.login(username, password)) setIsAuthenticated(true);
+    if (userService.login(username, password)) {
+      setIsAuthenticated(true);
+      navigateHome();
+    }
   }
 
   const signUp = (username, password) => {
-    if (userService.signUp(username, password)) setIsAuthenticated(true);
+    if (userService.signUp(username, password)) {
+      setIsAuthenticated(true);
+      navigateHome();
+    }
   }
 
   const logout = () => {
-    userService.logout()
+    userService.logout();
     setIsAuthenticated(false);
+    navigate("/login", { replace: true });
   }
 
   return (
