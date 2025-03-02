@@ -1,36 +1,37 @@
 import "react";
 import logo from "../assets/logo.svg"
-import dashboardIcon from "../assets/dashboard.svg";
-import calendarIcon from "../assets/calendar.svg";
-import courseIcon from "../assets/course.svg";
-import chatIcon from "../assets/chat.svg";
+import CalendarIcon from "../assets/calendar.svg?react";
+import CourseIcon from "../assets/course.svg?react";
+import ChatIcon from "../assets/chat.svg?react";
+import DashboardIcon from "../assets/dashboard.svg?react";
 import { dashboard, communication, courses, schedule } from "../constants/menus";
 
+// TODO: add indicator for selected menu
 function SideNavBar({ currentMenu, onClick }) {
   return (
     <div className="flex flex-col w-1/5 min-w-[240px] h-screen bg-midnightBlue gap-5 p-2" >
       <Logo />
-      <div className="flex flex-col gap-5 ps-2">
+      <div className="flex flex-col gap-5">
         <Menu 
-          icon={dashboardIcon}
+          icon={ <DashboardIcon /> }
           name={"Dashboard"}
           selected={currentMenu === dashboard}
           onClick={() => onClick(dashboard)}
         />
         <Menu 
-          icon={courseIcon}
+          icon={ <CourseIcon /> }
           name={"Courses"}
           selected={currentMenu === courses}
           onClick={() => onClick(courses)}
         />
         <Menu 
-          icon={calendarIcon}
+          icon={ <CalendarIcon /> }
           name={"Schedule"}
           selected={currentMenu === schedule}
           onClick={() => onClick(schedule)}
         />
         <Menu 
-          icon={chatIcon}
+          icon={ <ChatIcon /> }
           name={"Communication"}
           selected={currentMenu === communication}
           onClick={() => onClick(communication)}
@@ -56,21 +57,17 @@ function Logo() {
   );
 }
 
-// TODO: Adjust icon color
 function Menu({icon, name, selected, onClick}) {
   return (
     <button 
       className={`
         flex gap-5 items-center ${selected ? "text-orange" : "text-white"}
-        hover:cursor-pointer
+        hover:cursor-pointer transition-colors duration-300
         tint-[]
       `}
       onClick={onClick}
     >
-      <img
-        src={icon}
-        className={`w-[32px] h-[32px] stroke-1`} 
-      />
+      {icon}
       <div>
         {name}
       </div>
