@@ -9,8 +9,9 @@ function LoginPage() {
 
   return (
     <div className="text-white w-full max-h-screen h-full bg-[url('./assets/loginBackground.png')] bg-cover bg-center flex justify-end items-center">
-      <div className="absolute inset-0 backdrop-blur-[2px] bg-black/30 w-full h-full"></div>
-      <div className="login-container text-black w-[460px] h-160  p-10 flex justify-center bg-white mx-13 relative">
+      <div className="absolute inset-0 backdrop-blur-[2px] w-full h-full"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-[#010101] to-[#3c3b3b] opacity-80 w-full h-full"></div>
+      <div className="login-container text-black w-1/3 h-160  p-10 flex justify-center bg-white mx-13 relative">
         <div className="flex flex-col items-center  w-xs justify-evenly h-[90%] ">
           <img
             src={logo}
