@@ -6,9 +6,11 @@ import ChatIcon from "../assets/chat.svg?react";
 import DashboardIcon from "../assets/dashboard.svg?react";
 import { dashboard, communication, courses, schedule } from "../constants/menus";
 
-function SideNavBar({ currentMenu, onClick }) {
+function SideNavBar({ currentMenu, onClick, className = "" }) {
   return (
-    <div className="flex flex-col w-1/5 min-w-[240px] h-screen bg-midnightBlue gap-4" >
+    <div className={`
+      flex flex-col w-1/5 min-w-[240px] h-screen bg-midnightBlue gap-4 ${className}
+    `} >
       <Logo />
       <div className="flex flex-col gap-5">
         <Menu 
