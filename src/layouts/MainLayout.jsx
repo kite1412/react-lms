@@ -16,7 +16,7 @@ function MainLayout() {
       <SideNavBar 
         currentMenu={currentMenu}
         onClick={m => setCurrentMenu(m)}
-        className="hidden md:block"
+        className="hidden md:flex"
       />
       <div>
         asd
