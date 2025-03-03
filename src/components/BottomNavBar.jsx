@@ -6,7 +6,7 @@ import { communication, courses, dashboard, schedule } from "../constants/menus"
 
 function BottomNavBar({ selected, onClick }) {
   return (
-    <div className={`flex justify-evenly w-full h-[60px] bg-midnightBlue p-4`}>
+    <div className={`flex justify-evenly w-full h-[80px] bg-midnightBlue p-4`}>
       <Menu 
         icon={<DashboardIcon />}
         selected={ selected === dashboard }
