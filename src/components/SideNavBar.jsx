@@ -9,7 +9,7 @@ import { dashboard, communication, courses, schedule } from "../constants/menus"
 function SideNavBar({ currentMenu, onClick, className = "" }) {
   return (
     <div className={`
-      flex flex-col w-1/5 min-w-[240px] h-screen bg-midnightBlue gap-4 ${className}
+      flex flex-col h-full bg-midnightBlue gap-4 ${className}
     `} >
       <Logo />
       <div className="flex flex-col gap-5">

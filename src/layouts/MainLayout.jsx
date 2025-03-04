@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { dashboard } from "../constants/menus";
+import { courses, dashboard } from "../constants/menus";
 import SideNavBar from "../components/SideNavBar";
 import BottomNavBar from "../components/BottomNavBar";
 import TopBar from "../components/TopBar";
@@ -7,25 +7,35 @@ import TopBar from "../components/TopBar";
 /**
  * Layout for main menus (Dashboard, Courses, Schedule, and Communication)
  */
-function MainLayout() {
+function MainLayout({
+  dashboardContent,
+  coursesContent,
+  scheduleContent,
+  communicationContent
+}) {
   const [currentMenu, setCurrentMenu] = useState(dashboard);
 
   return (
-    <div className="flex flex-col w-screen h-screen md:flex-row">
+    <div className="sm:grid-rows-[80px_1fr_80px] w-full h-full grid md:grid-cols-[1fr_4fr] md:grid-rows-[1fr]">
       <TopBar className={"block md:hidden"} />
-      <SideNavBar 
+      <SideNavBar
         currentMenu={currentMenu}
         onClick={m => setCurrentMenu(m)}
         className="hidden md:flex"
       />
-      <div>
-        asd
-      </div>
-      {/* 60px = bottom nav bar height */}
-      <div className="hidden sm:block h-[80px]" />
-      <div className="block md:hidden mt-auto">
-        <BottomNavBar selected={currentMenu} onClick={m => setCurrentMenu(m)} />
-      </div>
+      {
+        currentMenu === dashboard ? dashboardContent
+        : currentMenu === courses ? coursesContent
+        : currentMenu === scheduleContent ? scheduleContent
+        : communicationContent
+      }
+      {/* 80px = bottom nav bar height */}
+      <div className="md:hidden sm:block h-[80px]" />
+      <BottomNavBar 
+        selected={currentMenu}
+        onClick={m => setCurrentMenu(m)}
+        className="flex md:hidden mt-auto" 
+      />
     </div>
   );
 }

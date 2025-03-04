@@ -4,9 +4,9 @@ import CalendarIcon from "../assets/calendar.svg?react";
 import ChatIcon from "../assets/chat.svg?react";
 import { communication, courses, dashboard, schedule } from "../constants/menus";
 
-function BottomNavBar({ selected, onClick }) {
+function BottomNavBar({ selected, onClick, className = "" }) {
   return (
-    <div className={`flex justify-evenly w-full h-[80px] bg-midnightBlue p-4`}>
+    <div className={`flex justify-evenly w-full h-[80px] bg-midnightBlue p-4 ${className}`}>
       <Menu 
         icon={<DashboardIcon />}
         selected={ selected === dashboard }
