@@ -10,7 +10,7 @@ function MainLayout() {
   const [currentMenu, setCurrentMenu] = useState(dashboard);
 
   return (
-    <div className="grid grid-cols-[1fr_4fr] w-screen h-screen">
+    <div className="grid grid-cols-[1fr_4fr] w-screen h-screen ">
       <SideNavBar
         currentMenu={currentMenu}
         onClick={(m) => setCurrentMenu(m)}

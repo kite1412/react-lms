@@ -68,6 +68,15 @@ body {
   min-height: 100vh;
 }
 
+.addIcon {
+  color: rgb(253, 186, 2);
+  color: linear-gradient(
+    152deg,
+    rgba(253, 186, 2, 1) 0%,
+    rgba(10, 55, 110, 1) 70%
+  );
+}
+
 /* h1 {
   font-size: 3.2em;
   line-height: 1.1;
