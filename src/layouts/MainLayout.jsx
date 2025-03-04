@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { courses, dashboard } from "../constants/menus";
+import { courses, dashboard, schedule } from "../constants/menus";
 import SideNavBar from "../components/SideNavBar";
 import BottomNavBar from "../components/BottomNavBar";
 import TopBar from "../components/TopBar";
@@ -27,7 +27,7 @@ function MainLayout({
         ? dashboardContent
         : currentMenu === courses
         ? coursesContent
-        : currentMenu === scheduleContent
+        : currentMenu === schedule
         ? scheduleContent
         : communicationContent}
       {/* 80px = bottom nav bar height */}
