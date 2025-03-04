@@ -1,7 +1,7 @@
 import CourseCard from "./CourseCard";
 import AddIcon from "../assets/plus.svg?react";
 
-function CoursesCard() {
+function CourseCards() {
   const courses = Array(11).fill(null);
   return (
     <div className=" flex gap-10 flex-wrap p-10 max-w-7xl w-full relative">
@@ -15,4 +15,4 @@ function CoursesCard() {
   );
 }
 
-export default CoursesCard;
+export default CourseCards;
