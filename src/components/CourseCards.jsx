@@ -4,7 +4,7 @@ import AddIcon from "../assets/plus.svg?react";
 function CourseCards() {
   const courses = Array(11).fill(null);
   return (
-    <div className=" flex gap-10 max-sm:gap-5 max-sm:p-5 flex-wrap p-10 max-w-7xl w-full relative max-sm:justify-center">
+    <div className="flex gap-10 max-sm:gap-5 max-sm:p-5 flex-wrap p-10 max-w-7xl w-full relative max-sm:justify-center">
       {courses.map((_, index) => (
         <CourseCard key={index} className="" />
       ))}

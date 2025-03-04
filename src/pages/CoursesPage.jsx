@@ -1,13 +1,11 @@
 import CourseCards from "../components/CourseCards";
+import ContentLayout from "../layouts/ContentLayout";
 
 function CoursesPage() {
   return (
-    <div className="bg-white w-full overflow-x-hidden relative">
-      <div className="border-b-1 border-gray-400 w-full h-15 text-black flex items-center px-5">
-        <h1 className="text-2xl font-bold">COURSES</h1>
-      </div>
+    <ContentLayout menu={"COURSES"} className="overflow-x-hidden" content={
       <CourseCards />
-    </div>
+    } />
   );
 }
 
