@@ -30,7 +30,6 @@ function MainLayout({
         : currentMenu === schedule
         ? scheduleContent
         : communicationContent}
-      {/* 80px = bottom nav bar height */}
       <div className="md:hidden sm:block h-fit bg-black" />
       <BottomNavBar
         selected={currentMenu}
