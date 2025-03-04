@@ -3,9 +3,11 @@ import ContentLayout from "../layouts/ContentLayout";
 
 function CoursesPage() {
   return (
-    <ContentLayout menu={"COURSES"} className="overflow-x-hidden" content={
-      <CourseCards />
-    } />
+    <ContentLayout
+      menu={"COURSES"}
+      className="overflow-x-hidden"
+      content={<CourseCards />}
+    />
   );
 }
 
