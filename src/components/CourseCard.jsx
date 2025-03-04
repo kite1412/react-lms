@@ -5,7 +5,7 @@ import DefaultProfilePicture from "../assets/profile-picture-blank.png";
 
 function CourseCard() {
   return (
-    <div className="w-60 h-45 bg-white rounded-md relative border-1 border-gray-400 flex flex-col justify-between overflow-hidden text-black cursor-pointer hover:shadow-lg">
+    <div className="w-60 h-45 max-sm:w-md bg-white rounded-md relative border-1 border-gray-400 flex flex-col justify-between overflow-hidden text-black cursor-pointer hover:shadow-lg">
       <div className="w-full h-20 bg-[#0A376E] flex justify-between text-white py-1">
         <div className="flex flex-col justify-between">
           <h2 className="mx-2">Informatika</h2>
