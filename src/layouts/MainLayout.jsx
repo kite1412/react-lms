@@ -11,30 +11,31 @@ function MainLayout({
   dashboardContent,
   coursesContent,
   scheduleContent,
-  communicationContent
+  communicationContent,
 }) {
   const [currentMenu, setCurrentMenu] = useState(dashboard);
 
   return (
-    <div className="sm:grid-rows-[80px_1fr_80px] w-full h-full grid md:grid-cols-[1fr_4fr] md:grid-rows-[1fr]">
+    <div className="bg-white sm:grid-rows-[80px_1fr_80px] w-full h-full grid md:grid-cols-[1fr_4fr] md:grid-rows-[1fr]">
       <TopBar className={"block md:hidden"} />
       <SideNavBar
         currentMenu={currentMenu}
-        onClick={m => setCurrentMenu(m)}
+        onClick={(m) => setCurrentMenu(m)}
         className="hidden md:flex"
       />
-      {
-        currentMenu === dashboard ? dashboardContent
-        : currentMenu === courses ? coursesContent
-        : currentMenu === scheduleContent ? scheduleContent
-        : communicationContent
-      }
+      {currentMenu === dashboard
+        ? dashboardContent
+        : currentMenu === courses
+        ? coursesContent
+        : currentMenu === scheduleContent
+        ? scheduleContent
+        : communicationContent}
       {/* 80px = bottom nav bar height */}
-      <div className="md:hidden sm:block h-[80px]" />
-      <BottomNavBar 
+      <div className="md:hidden sm:block h-fit bg-black" />
+      <BottomNavBar
         selected={currentMenu}
-        onClick={m => setCurrentMenu(m)}
-        className="flex md:hidden mt-auto" 
+        onClick={(m) => setCurrentMenu(m)}
+        className="flex md:hidden mt-auto"
       />
     </div>
   );
