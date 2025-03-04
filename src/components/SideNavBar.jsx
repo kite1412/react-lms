@@ -11,10 +11,11 @@ import {
   schedule,
 } from "../constants/menus";
 
-// TODO: add indicator for selected menu
-function SideNavBar({ currentMenu, onClick }) {
+function SideNavBar({ currentMenu, onClick, className = "" }) {
   return (
-    <div className="flex flex-col  h-screen bg-midnightBlue gap-5 p-2">
+    <div className={`
+      flex flex-col h-full bg-midnightBlue gap-4 ${className}
+    `} >
       <Logo />
       <div className="flex flex-col gap-5">
         <Menu
@@ -50,9 +51,14 @@ export default SideNavBar;
 
 function Logo() {
   return (
-    <div className="flex gap-2 items-center">
-      <img src={logo} className="w-[60px] h-[60px]" />
-      <div className="font-bold">SMKN 2 Bandar Lampung</div>
+    <div className="flex gap-2 items-center p-2">
+      <img
+        src={logo}
+        className="w-[60px] h-[60px]" 
+      />
+      <div className="font-bold">
+        SMKN 2 Bandar Lampung
+      </div>
     </div>
   );
 }
@@ -61,14 +67,23 @@ function Menu({ icon, name, selected, onClick }) {
   return (
     <button
       className={`
-        flex gap-5 items-center ${selected ? "text-orange" : "text-white"}
+        flex gap-3 items-center ${selected ? "text-orange" : "text-white"}
         hover:cursor-pointer transition-colors duration-300
-        tint-[]
       `}
       onClick={onClick}
     >
-      {icon}
-      <div>{name}</div>
+      <div 
+        className={`
+          h-full w-[3px] rounded-tr-[4px] rounded-br-[4px]
+          ${selected ? "bg-orange" : "bg-midnightBlue"}
+          transition-colors duration-500
+      `} />
+      <div className="flex gap-3 pt-3 pb-3">
+        {icon}
+        <div>
+          {name}
+        </div>
+      </div>
     </button>
   );
 }
