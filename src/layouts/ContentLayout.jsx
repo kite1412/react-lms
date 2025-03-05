@@ -1,11 +1,12 @@
-import gradientBackground from "../assets/gradient-background.svg";
+import GradientBackground from "../assets/gradient-background.svg?react";
 
 function ContentLayout({ menu, content, className = "" }) {
   return (
-    <div className={`bg-white w-full h-full relative text-black ${className}`}>
-      <span className={`text-3xl font-bold absolute z-1 mt-6 ms-6`}>{menu}</span>
-      <div className={`absolute mt-20 ms-6 z-2`}>
-        {content}
+    <div className={`bg-white w-full h-full text-black ${className} relative`}>
+      <GradientBackground className="absolute w-screen h-60 " />
+
+      <div className="w-full h-15 text-black flex items-center px-5 relative z-1">
+        <span className="text-3xl font-bold">{menu}</span>
       </div>
       <img src={gradientBackground} className="sticky top-0" />
     </div>
