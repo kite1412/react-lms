@@ -5,7 +5,6 @@ function CoursesPage() {
   return (
     <ContentLayout
       menu={"COURSES"}
-      className="overflow-x-hidden"
       content={<CourseCards />}
     />
   );
