@@ -8,7 +8,7 @@ function ContentLayout({ menu, content, className = "" }) {
       <div className="w-full h-15 text-black flex items-center px-5 relative z-1">
         <span className="text-3xl font-bold">{menu}</span>
       </div>
-      <img src={gradientBackground} className="sticky top-0" />
+      {content}
     </div>
   );
 }
