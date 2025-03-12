@@ -1,9 +1,11 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./routes/ProtectedRoute";
-import MainPage from "./pages/MainPage";
 import { AuthProvider } from "./contexts/AuthContext";
 import LoginPage from "./pages/LoginPage";
 import { USERNAME } from "./constants/auth";
+import DashboardPage from "./pages/DashboardPage";
+import SideNavBar from "./components/SideNavBar";
+import CoursesPage from "./pages/CoursesPage";
 
 function App() {
   const isAuthenticated = localStorage.getItem(USERNAME);
@@ -12,17 +14,23 @@ function App() {
     <BrowserRouter>
       <AuthProvider
         children={
-          <Routes>
-            <Route
-              path="/login"
-              element={
-                isAuthenticated ? <Navigate to={"/"} replace /> : <LoginPage />
-              }
+          <div className="h-screen w-screen grid md:grid-cols-[1fr_4fr] md:grid-rows-[1fr]">
+            <SideNavBar 
+              className="max-md:hidden"
             />
-            <Route element={<ProtectedRoute />}>
-              <Route index element={<MainPage />} />
-            </Route>
-          </Routes>
+            <Routes>
+              <Route
+                path="/login"
+                element={
+                  isAuthenticated ? <Navigate to={"/"} replace /> : <LoginPage />
+                }
+              />
+              <Route element={<ProtectedRoute />}>
+                <Route index element={<DashboardPage />} />
+                <Route path="/courses" element={<CoursesPage />} />
+              </Route>
+            </Routes>
+          </div>
         }
       />
     </BrowserRouter>
