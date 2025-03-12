@@ -1,21 +1,11 @@
 import "react";
 import logo from "../assets/logo.svg";
-import CalendarIcon from "../assets/calendar.svg?react";
-import CourseIcon from "../assets/course.svg?react";
-import ChatIcon from "../assets/chat.svg?react";
-import DashboardIcon from "../assets/dashboard.svg?react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { routes } from "../constants/routes"; 
 
 function SideNavBar({ className = "" }) {
   const navigate = useNavigate();
   const location = useLocation();
-
-  const routes = [
-    { name: "Dashboard", path: "/", icon: <DashboardIcon /> },
-    { name: "Courses", path: "/courses", icon: <CourseIcon /> },
-    { name: "Calendar", path: "/calendar", icon: <CalendarIcon /> },
-    { name: "Communication", path: "/communication", icon: <ChatIcon /> }
-  ];
 
   return (
     <div className={`

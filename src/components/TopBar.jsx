@@ -3,8 +3,8 @@ import logo from "../assets/logo.svg"
 function TopBar({ className }) {
   return (
     <div className={`
-      h-[80px] w-screen flex items-center gap-4 ${className}
-      bg-midnightBlue p-4
+      h-[80px] w-screen flex items-center gap-4
+      bg-midnightBlue p-4 ${className}
     `}>
       <img 
         src={logo}

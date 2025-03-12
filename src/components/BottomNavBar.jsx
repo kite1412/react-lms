@@ -1,32 +1,21 @@
-import DashboardIcon from "../assets/dashboard.svg?react";
-import CoursesIcon from "../assets/course.svg?react";
-import CalendarIcon from "../assets/calendar.svg?react";
-import ChatIcon from "../assets/chat.svg?react";
-import { communication, courses, dashboard, schedule } from "../constants/menus";
+import { routes } from "../constants/routes";
+import { useLocation, useNavigate } from "react-router-dom";
 
-function BottomNavBar({ selected, onClick, className = "" }) {
+function BottomNavBar({ className = "" }) {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   return (
     <div className={`flex justify-evenly w-full h-[80px] bg-midnightBlue p-4 ${className}`}>
-      <Menu 
-        icon={<DashboardIcon />}
-        selected={ selected === dashboard }
-        onClick={() => onClick(dashboard)}
-      />
-      <Menu 
-        icon={<CoursesIcon />}
-        selected={ selected === courses }
-        onClick={() => onClick(courses)}
-      />
-      <Menu 
-        icon={<CalendarIcon />}
-        selected={ selected === schedule }
-        onClick={() => onClick(schedule)}
-      />
-      <Menu 
-        icon={<ChatIcon />}
-        selected={ selected === communication }
-        onClick={() => onClick(communication)}
-      />
+      {
+        routes.map((o, _) => (
+          <Menu 
+            icon={o.icon}
+            selected={location.pathname === o.path}
+            onClick={() => navigate(o.path)}
+          />
+        ))
+      }
     </div>
   );
 }
