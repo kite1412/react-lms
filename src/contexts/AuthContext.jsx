@@ -13,9 +13,15 @@ const AuthContext = createContext({
 /**
  * Provider that provides user authentication information.
  * @param {ReactNode} children - Content inside this provider  
+ * @param {() => void} postAuth - Callback function after successfully signed in  
+ * @param {() => void} postLogout - Callback function after successfully logged out
  * @returns {JSX.Element}
  */
-export function AuthProvider({children}) {
+export function AuthProvider({ 
+  children,
+  postAuth = () => {},
+  postLogout = () => {}
+}) {
   const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem(USERNAME));
   const navigate = useNavigate();
   const navigateHome = () => {
@@ -26,6 +32,7 @@ export function AuthProvider({children}) {
     if (userService.login(username, password)) {
       setIsAuthenticated(true);
       navigateHome();
+      postAuth();
     }
   }
 
@@ -33,6 +40,7 @@ export function AuthProvider({children}) {
     if (userService.signUp(username, password)) {
       setIsAuthenticated(true);
       navigateHome();
+      postAuth();
     }
   }
 
@@ -40,6 +48,7 @@ export function AuthProvider({children}) {
     userService.logout();
     setIsAuthenticated(false);
     navigate("/login", { replace: true });
+    postLogout();
   }
 
   return (
