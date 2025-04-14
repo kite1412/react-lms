@@ -37,7 +37,7 @@ export function AuthProvider({
 
     if (res && res.success) {
       localStorage.setItem(JWT, res.data.token);
-      localStorage.setItem(USER, res.data.user);
+      localStorage.setItem(USER, JSON.stringify(res.data.user));
       setIsAuthenticated(true);
       callback(true);
       navigateHome();

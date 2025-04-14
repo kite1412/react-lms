@@ -6,13 +6,7 @@ import courseService from "../services/courseService";
 function CoursesPage() {
   const { data, isPending } = useQuery({
     queryKey: ["my-courses"],
-    queryFn: async () => {
-      const res = await courseService.getMyCourses();
-
-      console.log(res);
-
-      return res;
-    }
+    queryFn: async () => await courseService.getMyCourses()
   });
 
   return (
