@@ -4,7 +4,7 @@ class UserService {
   async getAllUsers() {
     try {
       const res = await API.get("/users");
-      return res.data.data;
+      return res.data;
     } catch (error) {
       throw error.response?.data || error;
     }
@@ -13,7 +13,7 @@ class UserService {
   async getUserById(userId) {
     try {
       const res = await API.get(`/users/${userId}`);
-      return res.data.data;
+      return res.data;
     } catch (error) {
       throw error.response?.data || error;
     }
@@ -22,7 +22,7 @@ class UserService {
   async createUser(userData) {
     try {
       const res = await API.post("/users", userData);
-      return res.data.data;
+      return res.data;
     } catch (error) {
       throw error.response?.data || error;
     }
@@ -31,7 +31,7 @@ class UserService {
   async updateUser(userId, newUserData) {
     try {
       const res = await API.patch(`/users/${userId}`, newUserData);
-      return res.data.data;
+      return res.data;
     } catch (error) {
       throw error.response?.data || error;
     }
@@ -40,7 +40,7 @@ class UserService {
   async deleteUser(userId) {
     try {
       const res = await API.delete(`/users/${userId}`);
-      return res.data.data;
+      return res.data;
     } catch (error) {
       throw error.response?.data || error;
     }
@@ -52,7 +52,7 @@ class UserService {
         `/users/update-password/${userId}`,
         newPassword
       );
-      return res.data.data;
+      return res.data;
     } catch (error) {
       throw error.response?.data || error;
     }
