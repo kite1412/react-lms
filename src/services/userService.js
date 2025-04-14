@@ -1,31 +1,62 @@
 import API from "../utils/axiosConfig";
 
-export const getAllUsers = async () => {
-  const res = await API.get("/users");
-  return res.data.data;
-};
+class UserService {
+  async getAllUsers() {
+    try {
+      const res = await API.get("/users");
+      return res.data.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
+  }
 
-export const getUserById = async (userId) => {
-  const res = await API.get(`/users/${userId}`);
-  return res.data.data;
-};
+  async getUserById(userId) {
+    try {
+      const res = await API.get(`/users/${userId}`);
+      return res.data.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
+  }
 
-export const createUser = async () => {
-  const res = await API.post("/users", userData);
-  return res.data.data;
-};
+  async createUser(userData) {
+    try {
+      const res = await API.post("/users", userData);
+      return res.data.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
+  }
 
-export const updateUser = async (userId) => {
-  const res = await API.patch(`/users/${userId}`, newUserData);
-  return res.data.data;
-};
+  async updateUser(newUserData) {
+    try {
+      const res = await API.patch(`/users/${userId}`, newUserData);
+      return res.data.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
+  }
 
-export const deleteUser = async (userId) => {
-  const res = await API.delete(`/users/${userId}`);
-  return res.data.data;
-};
+  async deleteUser(userId) {
+    try {
+      const res = await API.delete(`/users/${userId}`);
+      return res.data.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
+  }
 
-export const updateUserPassword = async (userId) => {
-  const res = await API.patch(`/users/update-password/${userId}`, newPassword);
-  return res.data.data;
-};
+  async updateUserPassword(userId, newPassword) {
+    try {
+      const res = await API.patch(
+        `/users/update-password/${userId}`,
+        newPassword
+      );
+      return res.data.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
+  }
+}
+
+export default new UserService();

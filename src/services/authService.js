@@ -1,11 +1,23 @@
 import API from "../utils/axiosConfig";
 
-export const login = async (credentials) => {
-  const res = await API.post("/auth/login", credentials);
-  return res.data;
-};
+class AuthService {
+  async login(credentials) {
+    try {
+      const res = await API.post("/auth/login", credentials);
+      return res.data.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
+  }
 
-export const logout = async () => {
-  const res = await API.post("/auth/logout");
-  return res.data;
-};
+  async logout() {
+    try {
+      const res = await API.post("/auth/logout");
+      return res.data.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
+  }
+}
+
+export default new AuthService();

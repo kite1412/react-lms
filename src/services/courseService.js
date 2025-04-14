@@ -1,36 +1,68 @@
 import API from "../utils/axiosConfig";
 
-export const getAllCourses = async () => {
-  const res = await API.get("/courses");
-  return res.data.data;
-};
+class CourseService {
+  async getAllCourses() {
+    try {
+      const res = await API.get("/courses");
+      return res.data.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
+  }
 
-export const getCourseById = async (courseId) => {
-  const res = await API.get(`/courses/${courseId}`);
-  return res.data.data;
-};
+  async getCourseById(courseId) {
+    try {
+      const res = await API.get(`/courses/${courseId}`);
+      return res.data.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
+  }
 
-export const getMyCourses = async () => {
-  const res = await API.get("/courses/my-courses");
-  return res.data.data;
-};
+  async getMyCourses() {
+    try {
+      const res = await API.get("/courses/my-courses");
+      return res.data.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
+  }
 
-export const createCourse = async (courseData) => {
-  const res = await API.post("/courses", courseData);
-  return res.data.data;
-};
+  async createCourse(coureData) {
+    try {
+      const res = await API.post("/courses", courseData);
+      return res.data.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
+  }
 
-export const updateCourse = async (courseId, newCourseData) => {
-  const res = await API.patch(`/courses/${courseId}`, newCourseData);
-  return res.data.data;
-};
+  async updateCourse(courseId, newCourseData) {
+    try {
+      const res = await API.patch(`/courses/${courseId}`, newCourseData);
+      return res.data.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
+  }
 
-export const deleteCourse = async (courseId) => {
-  const res = await API.delete(`/courses/${courseId}`);
-  return res.data.data;
-};
+  async deleteCourse(courseId) {
+    try {
+      const res = await API.delete(`/courses/${courseId}`);
+      return res.data.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
+  }
 
-export const joinCourse = async (courseCode) => {
-  const res = await API.post(`/courses/join/${courseCode}`);
-  return res.data.data;
-};
+  async joinCourse(courseCode) {
+    try {
+      const res = await API.post(`/courses/join/${courseCode}`);
+      return res.data.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
+  }
+}
+
+export default new CourseService();
