@@ -16,7 +16,7 @@ function DashboardPage() {
             <select
               name="kelas"
               id="kelas"
-              className="h-fit outline-0 bg-white text-black rounded-sm"
+              className="h-fit outline-0 bg-white text-black rounded-sm cursor-pointer"
               defaultValue=""
             >
               <option value="" disabled>
@@ -46,7 +46,7 @@ function DashboardPage() {
                   Kelas 11
                 </span>
               </h2>
-              <ul className="flex border-1 border-gray-400 rounded-md w-xs text-xs">
+              <ul className="flex border-1 border-gray-400 rounded-md w-xs text-xs cursor-pointer">
                 <li className="flex-1 text-center py-1 px-1 border-1 border-l-0 border-t-0 border-b-0 border-gray-400 bg-[#FDBA02] text-white">
                   Senin
                 </li>
