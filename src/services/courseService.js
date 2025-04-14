@@ -22,7 +22,7 @@ class CourseService {
   async getMyCourses() {
     try {
       const res = await API.get("/courses/my-courses");
-      return res.data.data;
+      return res.data;
     } catch (error) {
       throw error.response?.data || error;
     }
