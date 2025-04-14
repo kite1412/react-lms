@@ -28,7 +28,7 @@ class CourseService {
     }
   }
 
-  async createCourse(coureData) {
+  async createCourse(courseData) {
     try {
       const res = await API.post("/courses", courseData);
       return res.data.data;

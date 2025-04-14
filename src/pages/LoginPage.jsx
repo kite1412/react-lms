@@ -1,15 +1,17 @@
 import { useState } from "react";
-import logo from "../assets/logo.svg";
-import eye from "../assets/eye.svg";
 import eyeSlash from "../assets/eye-slash.svg";
+import eye from "../assets/eye.svg";
+import logo from "../assets/logo.svg";
 import { useAuth } from "../contexts/AuthContext";
 
+// TODO show snackbar when login failed
 function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { login } = useAuth();
-  const buttonDisabled = !username || !password
+  const buttonDisabled = !email || !password;
+  const [failed, setFailed] = useState(false); 
 
   return (
     <div className="text-white w-full max-h-screen h-full bg-[url('./assets/loginBackground.png')] bg-cover bg-center flex justify-end items-center">
@@ -32,8 +34,8 @@ function LoginPage() {
                 name="username"
                 id="username"
                 className="bg-[#D9D9D9] outline-none rounded-md h-10 px-2"
-                value={username}
-                onChange={e => setUsername(e.target.value)}
+                value={email}
+                onChange={e => setEmail(e.target.value)}
               />
             </li>
             <li className="flex flex-col gap-1 ">
@@ -67,7 +69,11 @@ function LoginPage() {
               ${buttonDisabled ? "opacity-70" : "opacity-100"}
             `}
             onClick={() => {
-              login(username, password);
+              login(
+                email,
+                password,
+                s => setFailed(s)
+              );
             }}
             disabled={buttonDisabled}
           >

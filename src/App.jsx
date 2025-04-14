@@ -2,7 +2,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import { AuthProvider } from "./contexts/AuthContext";
 import LoginPage from "./pages/LoginPage";
-import { USERNAME } from "./constants/auth";
+import { JWT } from "./constants/auth";
 import DashboardPage from "./pages/DashboardPage";
 import SideNavBar from "./components/SideNavBar";
 import CoursesPage from "./pages/CoursesPage";
@@ -11,7 +11,7 @@ import BottomNavBar from "./components/BottomNavBar";
 import { useState } from "react";
 
 function App() {
-  let [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem(USERNAME));
+  const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem(JWT));
   const hideUnauthenticated = `${!isAuthenticated && "hidden"}`;
 
   return (

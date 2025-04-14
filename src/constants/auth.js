@@ -1,1 +1,2 @@
-export const USERNAME = "username";
+export const USER = "user";
+export const JWT = "jwt";

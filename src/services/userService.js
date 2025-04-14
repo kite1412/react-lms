@@ -28,7 +28,7 @@ class UserService {
     }
   }
 
-  async updateUser(newUserData) {
+  async updateUser(userId, newUserData) {
     try {
       const res = await API.patch(`/users/${userId}`, newUserData);
       return res.data.data;

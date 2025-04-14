@@ -4,7 +4,7 @@ class AuthService {
   async login(credentials) {
     try {
       const res = await API.post("/auth/login", credentials);
-      return res.data.data;
+      return res.data;
     } catch (error) {
       throw error.response?.data || error;
     }
@@ -13,7 +13,7 @@ class AuthService {
   async logout() {
     try {
       const res = await API.post("/auth/logout");
-      return res.data.data;
+      return res.data;
     } catch (error) {
       throw error.response?.data || error;
     }

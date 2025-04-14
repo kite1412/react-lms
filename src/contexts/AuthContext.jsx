@@ -1,7 +1,7 @@
-import { createContext, useContext, ReactNode, JSX, useState } from "react";
-import { userService } from "../objects";
-import { USERNAME } from "../constants/auth";
+import { createContext, JSX, ReactNode, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { JWT, USER } from "../constants/auth";
+import authService from "../services/authService";
 
 const AuthContext = createContext({
   isAuthenticated: false,
@@ -22,33 +22,36 @@ export function AuthProvider({
   postAuth = () => {},
   postLogout = () => {}
 }) {
-  const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem(USERNAME));
+  const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem(JWT));
   const navigate = useNavigate();
   const navigateHome = () => {
     navigate("/", { replace: true });    
   };
 
-  const login = (username, password) => {
-    if (userService.login(username, password)) {
-      setIsAuthenticated(true);
-      navigateHome();
-      postAuth();
-    }
-  }
+  const login = async (email, password, callback) => {
+    const res = await authService.login({
+      email: email,
+      password: password
+    });
+    console.log(res);
 
-  const signUp = (username, password) => {
-    if (userService.signUp(username, password)) {
+    if (res && res.success) {
+      localStorage.setItem(JWT, res.data.token);
+      localStorage.setItem(USER, res.data.user);
       setIsAuthenticated(true);
+      callback(true);
       navigateHome();
       postAuth();
     }
+
+    callback(false);
   }
 
   const logout = () => {
-    userService.logout();
-    setIsAuthenticated(false);
-    navigate("/login", { replace: true });
-    postLogout();
+    // userService.logout();
+    // setIsAuthenticated(false);
+    // navigate("/login", { replace: true });
+    // postLogout();
   }
 
   return (
@@ -56,7 +59,6 @@ export function AuthProvider({
       value={{
         isAuthenticated: isAuthenticated,
         login: login,
-        signUp: signUp,
         logout: logout
       }}
     >

@@ -1,12 +1,12 @@
 import axios from "axios";
+import { JWT } from "../constants/auth";
 
 const API = axios.create({
-  baseUrl: "http://localhost:5001",
-  withCredentials: true,
+  baseURL: "http://localhost:5001",
 });
 
 API.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem(JWT);
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
