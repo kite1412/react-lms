@@ -19,6 +19,15 @@ class AssignmentService {
     }
   }
 
+  async getMyAssignments() {
+    try {
+      const res = await API.get("/assignments/my");
+      return res.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
+  }
+
   async createAssignment(courseId, assignmentData) {
     try {
       const res = await API.post(
