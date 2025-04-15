@@ -28,11 +28,11 @@ function LoginPage() {
           <h2>Sign in Your Account</h2>
           <ul className="w-full flex flex-col gap-3 font-light">
             <li className="flex flex-col gap-1">
-              <label htmlFor="username">Username</label>
+              <label htmlFor="email">Email</label>
               <input
                 type="text"
-                name="username"
-                id="username"
+                name="email"
+                id="email"
                 className="bg-[#D9D9D9] outline-none rounded-md h-10 px-2"
                 value={email}
                 onChange={e => setEmail(e.target.value)}

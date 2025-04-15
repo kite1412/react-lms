@@ -4,7 +4,7 @@ class CourseService {
   async getAllCourses() {
     try {
       const res = await API.get("/courses");
-      return res.data.data;
+      return res.data;
     } catch (error) {
       throw error.response?.data || error;
     }
@@ -13,7 +13,7 @@ class CourseService {
   async getCourseById(courseId) {
     try {
       const res = await API.get(`/courses/${courseId}`);
-      return res.data.data;
+      return res.data;
     } catch (error) {
       throw error.response?.data || error;
     }
@@ -22,7 +22,7 @@ class CourseService {
   async getMyCourses() {
     try {
       const res = await API.get("/courses/my-courses");
-      return res.data.data;
+      return res.data;
     } catch (error) {
       throw error.response?.data || error;
     }
@@ -31,7 +31,7 @@ class CourseService {
   async createCourse(courseData) {
     try {
       const res = await API.post("/courses", courseData);
-      return res.data.data;
+      return res.data;
     } catch (error) {
       throw error.response?.data || error;
     }
@@ -40,7 +40,7 @@ class CourseService {
   async updateCourse(courseId, newCourseData) {
     try {
       const res = await API.patch(`/courses/${courseId}`, newCourseData);
-      return res.data.data;
+      return res.data;
     } catch (error) {
       throw error.response?.data || error;
     }
@@ -49,7 +49,7 @@ class CourseService {
   async deleteCourse(courseId) {
     try {
       const res = await API.delete(`/courses/${courseId}`);
-      return res.data.data;
+      return res.data;
     } catch (error) {
       throw error.response?.data || error;
     }
@@ -58,7 +58,7 @@ class CourseService {
   async joinCourse(courseCode) {
     try {
       const res = await API.post(`/courses/join/${courseCode}`);
-      return res.data.data;
+      return res.data;
     } catch (error) {
       throw error.response?.data || error;
     }
