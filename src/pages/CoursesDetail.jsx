@@ -1,41 +1,36 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import ContentLayout from "../layouts/ContentLayout";
 import { useParams, Link } from "react-router-dom";
-import MateriIcon from "../assets/book.svg?react";
-import AssigmentIcon from "../assets/clipboard-assigment.svg?react";
 import courseService from "../services/courseService";
-("../services/courseService.js");
+import ForumsTab from "../components/ForumsTab";
+import AssignmentTab from "../components/AssignmentTab";
 
 function CoursesDetail() {
   const { id } = useParams();
-  const [course, setCourse] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [err, setErr] = useState(null);
   const [activeTab, setActiveTab] = useState("forums");
 
-  useEffect(() => {
-    const fetchCourse = async () => {
-      try {
-        const data = await courseService.getCourseById(id);
-        setCourse(data);
-      } catch (err) {
-        setErr(err.message || "failed to get course");
-      } finally {
-        setLoading(false);
-      }
-    };
+  const {
+    data: course,
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["course", id],
+    queryFn: () => courseService.getCourseById(id).then((res) => res.data),
+  });
 
-    fetchCourse();
-  }, [id]);
-
-  if (loading) {
-    return <div className="px-20 py-10 text-gray-600">Loading courses...</div>;
+  if (isLoading) {
+    return <div className="px-20 py-10 text-gray-600">Loading course...</div>;
   }
 
-  if (err) {
-    return <div className="px-20 py-10 text-red-500">Error: {err}</div>;
+  if (isError) {
+    return (
+      <div className="px-20 py-10 text-red-500">
+        Error: {error.message || "Failed to load course"}
+      </div>
+    );
   }
-
   return (
     <ContentLayout
       menu={"COURSE DETAIL"}
@@ -82,10 +77,10 @@ function CoursesDetail() {
               </button>
             </nav>
           </div>
-          {/* 
+
           {activeTab === "forums" && <ForumsTab />}
           {activeTab === "assignment" && <AssignmentTab />}
-          {activeTab === "people" && <PeopleTab />} */}
+          {activeTab === "people" && <PeopleTab />}
         </div>
       }
     />
@@ -93,98 +88,6 @@ function CoursesDetail() {
 }
 
 export default CoursesDetail;
-
-// function ForumsTab() {
-//   const { id } = useParams();
-//   const course = courses[id];
-
-//   const forums = [
-//     ...course.materials.map((item) => ({ ...item, type: "materials" })),
-//     ...course.assignments.map((item) => ({ ...item, type: "assignments" })),
-//   ];
-
-//   const assignments = forums.filter((item) => item.type === "assignments");
-
-//   return (
-//     <div className="mt-6 flex flex-col lg:flex-row gap-6">
-//       {/* Kolom Kiri: List Forum */}
-//       <div className="w-full lg:w-2/3">
-//         {forums.map((item, index) => {
-//           const isAssignment = item.type === "assignments";
-//           return (
-//             <Link
-//               to={`/courses/${course.id}/${item.type}/${item.id}`}
-//               key={index}
-//               className="bg-white border border-gray-200 rounded-md px-4 py-3 mb-4 shadow-sm hover:shadow-md transition-shadow cursor-pointer flex items-center">
-//               <div className="mr-4">
-//                 {isAssignment ? (
-//                   <AssigmentIcon className="text-[#FDBA02]" />
-//                 ) : (
-//                   <MateriIcon className="text-[#FDBA02]" />
-//                 )}
-//               </div>
-//               <div className="flex flex-col">
-//                 <span className="font-medium text-lg">{item.title}</span>
-//                 <span className="text-sm text-gray-500">
-//                   {isAssignment ? `Due: ${item.dueDate}` : `File: ${item.file}`}
-//                 </span>
-//               </div>
-//             </Link>
-//           );
-//         })}
-//       </div>
-
-//       {/* Kolom Kanan: Upcoming Box */}
-//       <div className="w-full lg:w-1/3">
-//         <div className="bg-white border border-gray-200 rounded-md p-4 shadow-sm">
-//           <h3 className="font-semibold text-lg mb-3">Upcoming</h3>
-//           {assignments.length > 0 ? (
-//             assignments.map((item, index) => (
-//               <div key={index} className="mb-3">
-//                 <p className="text-sm text-red-500 font-medium">Deadline</p>
-//                 <p className="text-sm text-gray-700">
-//                   {item.dueDate} - {item.title}
-//                 </p>
-//               </div>
-//             ))
-//           ) : (
-//             <p className="text-sm text-gray-500">No upcoming assignments.</p>
-//           )}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
-// function AssignmentTab() {
-//   const { id } = useParams();
-//   const course = courses[id];
-
-//   return (
-//     <div className="mt-6">
-//       {course.assignments.length > 0 ? (
-//         course.assignments.map((item, index) => (
-//           <Link
-//             to={`/courses/${course.id}/assignments/${item.id}`}
-//             key={index}
-//             className="bg-white border border-gray-200 rounded-md px-4 py-3 mb-4 shadow-sm hover:shadow-md transition-shadow cursor-pointer flex items-center">
-//             <div className="mr-4">
-//               <AssigmentIcon className="text-[#FDBA02]" />
-//             </div>
-//             <div className="flex flex-col">
-//               <span className="font-medium text-lg">{item.title}</span>
-//               <span className="text-sm text-gray-500 flex items-center">
-//                 Due: {item.dueDate}
-//               </span>
-//             </div>
-//           </Link>
-//         ))
-//       ) : (
-//         <div className="text-gray-500 mt-4">Belum ada tugas.</div>
-//       )}
-//     </div>
-//   );
-// }
 
 // function PeopleTab() {
 //   const { id } = useParams();

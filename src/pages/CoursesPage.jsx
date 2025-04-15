@@ -4,15 +4,18 @@ import ContentLayout from "../layouts/ContentLayout";
 import courseService from "../services/courseService";
 
 function CoursesPage() {
-  const { data, isPending } = useQuery({
+  const { data, isPending, isError, error } = useQuery({
     queryKey: ["my-courses"],
     queryFn: async () => await courseService.getMyCourses(),
   });
-  console.log(data.data);
+
+  if (isPending) return <div>Loading courses...</div>;
+  if (isError) return <div>Error: {error.message}</div>;
+
   return (
     <ContentLayout
       menu={"COURSES"}
-      content={!isPending && data ? <CourseCards courses={data.data} /> : <></>}
+      content={<CourseCards courses={data.data} />}
     />
   );
 }
