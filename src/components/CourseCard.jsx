@@ -3,13 +3,16 @@ import FolderIcon from "../assets/folder.svg?react";
 import TaskIcon from "../assets/clipboard.svg?react";
 import DefaultProfilePicture from "../assets/profile-picture-blank.png";
 
-function CourseCard() {
+function CourseCard({
+  name,
+  owner
+}) {
   return (
     <div className="w-60 h-45 max-sm:w-md bg-white rounded-md relative border-1 border-gray-400 flex flex-col justify-between overflow-hidden text-black cursor-pointer hover:shadow-lg">
       <div className="w-full h-20 bg-[#0A376E] flex justify-between text-white py-1">
         <div className="flex flex-col justify-between">
-          <h2 className="mx-2">Informatika</h2>
-          <h3 className="mx-2 text-sm">Harianto</h3>
+          <h2 className="mx-2">{name}</h2>
+          <h3 className="mx-2 text-sm">{owner}</h3>
         </div>
         <MoreIcon className="w-[20px] h-[20px] text-white cursor-pointer m-1" />
       </div>

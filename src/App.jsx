@@ -9,6 +9,9 @@ import CoursesPage from "./pages/CoursesPage";
 import TopBar from "./components/TopBar";
 import BottomNavBar from "./components/BottomNavBar";
 import { useState } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem(JWT));
@@ -16,37 +19,41 @@ function App() {
 
   return (
     <BrowserRouter>
-      <AuthProvider
-        children={
-          <div className={`
-            h-screen w-screen grid ${
-              isAuthenticated && "sm:grid-rows-[80px_1fr_80px] md:grid-cols-[1fr_4fr] md:grid-rows-[1fr]"
-            } overflow-x-hidden
-          `}>
-            <TopBar className={`md:hidden ${hideUnauthenticated}`} />
-            <SideNavBar
-              className={`max-md:hidden ${hideUnauthenticated}`}
-            />
-            <Routes>
-              <Route
-                path="/login"
-                element={
-                  isAuthenticated ? <Navigate to={"/"} replace /> : <LoginPage />
-                }
+      <QueryClientProvider
+        client={queryClient}
+      >
+        <AuthProvider
+          children={
+            <div className={`
+              h-screen w-screen grid ${
+                isAuthenticated && "sm:grid-rows-[80px_1fr_80px] md:grid-cols-[1fr_4fr] md:grid-rows-[1fr]"
+              } overflow-x-hidden
+            `}>
+              <TopBar className={`md:hidden ${hideUnauthenticated}`} />
+              <SideNavBar
+                className={`max-md:hidden ${hideUnauthenticated}`}
               />
-              <Route element={<ProtectedRoute />}>
-                <Route index element={<DashboardPage />} />
-                <Route path="/courses" element={<CoursesPage />} />
-              </Route>
-            </Routes>
-            <BottomNavBar 
-              className={`md:hidden ${hideUnauthenticated}`}
-            />
-          </div>
-        }
-        postAuth={() => setIsAuthenticated(true)}
-        postLogout={() => setIsAuthenticated(false)}
-      />
+              <Routes>
+                <Route
+                  path="/login"
+                  element={
+                    isAuthenticated ? <Navigate to={"/"} replace /> : <LoginPage />
+                  }
+                />
+                <Route element={<ProtectedRoute />}>
+                  <Route index element={<DashboardPage />} />
+                  <Route path="/courses" element={<CoursesPage />} />
+                </Route>
+              </Routes>
+              <BottomNavBar 
+                className={`md:hidden ${hideUnauthenticated}`}
+              />
+            </div>
+          }
+          postAuth={() => setIsAuthenticated(true)}
+          postLogout={() => setIsAuthenticated(false)}
+        />
+      </QueryClientProvider>
     </BrowserRouter>
   );
 }
