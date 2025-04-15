@@ -9,39 +9,55 @@ import CoursesPage from "./pages/CoursesPage";
 import TopBar from "./components/TopBar";
 import BottomNavBar from "./components/BottomNavBar";
 import { useState } from "react";
+import CoursesDetail from "./pages/CoursesDetail";
+import AssignmentsDetail from "./pages/AssignmentsDetail";
+import MaterialDetail from "./pages/MaterialDetail";
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem(JWT));
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    localStorage.getItem(JWT)
+  );
   const hideUnauthenticated = `${!isAuthenticated && "hidden"}`;
 
   return (
     <BrowserRouter>
       <AuthProvider
         children={
-          <div className={`
+          <div
+            className={`
             h-screen w-screen grid ${
-              isAuthenticated && "sm:grid-rows-[80px_1fr_80px] md:grid-cols-[1fr_4fr] md:grid-rows-[1fr]"
+              isAuthenticated &&
+              "sm:grid-rows-[80px_1fr_80px] md:grid-cols-[1fr_4fr] md:grid-rows-[1fr]"
             } overflow-x-hidden
           `}>
             <TopBar className={`md:hidden ${hideUnauthenticated}`} />
-            <SideNavBar
-              className={`max-md:hidden ${hideUnauthenticated}`}
-            />
+            <SideNavBar className={`max-md:hidden ${hideUnauthenticated}`} />
             <Routes>
               <Route
                 path="/login"
                 element={
-                  isAuthenticated ? <Navigate to={"/"} replace /> : <LoginPage />
+                  isAuthenticated ? (
+                    <Navigate to={"/"} replace />
+                  ) : (
+                    <LoginPage />
+                  )
                 }
               />
               <Route element={<ProtectedRoute />}>
                 <Route index element={<DashboardPage />} />
                 <Route path="/courses" element={<CoursesPage />} />
+                <Route path="/courses/:id" element={<CoursesDetail />} />
+                <Route
+                  path="/courses/:courseId/materials/:materialId"
+                  element={<MaterialDetail />}
+                />
+                <Route
+                  path="/courses/:courseId/assignments/:assignmentId"
+                  element={<AssignmentsDetail />}
+                />
               </Route>
             </Routes>
-            <BottomNavBar 
-              className={`md:hidden ${hideUnauthenticated}`}
-            />
+            <BottomNavBar className={`md:hidden ${hideUnauthenticated}`} />
           </div>
         }
         postAuth={() => setIsAuthenticated(true)}
