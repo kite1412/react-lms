@@ -5,6 +5,7 @@ import { useParams, Link } from "react-router-dom";
 import courseService from "../services/courseService";
 import ForumsTab from "../components/ForumsTab";
 import AssignmentTab from "../components/AssignmentTab";
+import PeopleTab from "../components/PeopleTab";
 
 function CoursesDetail() {
   const { id } = useParams();
@@ -41,7 +42,12 @@ function CoursesDetail() {
               <span className="ml-2 mt-1 text-white uppercase font-bold text-3xl underline">
                 {course.name}
               </span>
-              <span className="ml-2 mt-1 text-white">{course.teacher}</span>
+              <span className="ml-2 mt-1 text-white font-bold">
+                {course.teacher}
+              </span>
+              <span className=" text-justify ml-2 mt-1 text-white">
+                {course.description}
+              </span>
             </div>
           </div>
 
@@ -88,24 +94,3 @@ function CoursesDetail() {
 }
 
 export default CoursesDetail;
-
-// function PeopleTab() {
-//   const { id } = useParams();
-//   const course = courses[id];
-
-//   return (
-//     <div className="mt-6">
-//       <div className="flex items-center space-x-4 p-4 bg-white rounded-md shadow border">
-//         <img
-//           src={course.profilePicture}
-//           alt="Instructor"
-//           className="w-16 h-16 rounded-full object-cover"
-//         />
-//         <div>
-//           <div className="font-semibold text-lg">{course.instructor}</div>
-//           <div className="text-gray-500 text-sm">Dosen Pengampu</div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
