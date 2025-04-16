@@ -13,11 +13,14 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import CoursesDetail from "./pages/CoursesDetail";
 import AssignmentsDetail from "./pages/AssignmentsDetail";
 import MaterialDetail from "./pages/MaterialDetail";
+import { isJwtExpired } from "./utils/tokens";
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(
-    localStorage.getItem(JWT)
-  );
+  const [isAuthenticated, setIsAuthenticated] = useState(function () {
+    const jwt = localStorage.getItem(JWT);
+
+    return jwt !== undefined && jwt !== null && !isJwtExpired(jwt);
+  }());
   const hideUnauthenticated = `${!isAuthenticated && "hidden"}`;
   const queryClient = new QueryClient();
 
