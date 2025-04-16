@@ -2,13 +2,14 @@ import { createContext, JSX, ReactNode, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { JWT, USER } from "../constants/auth";
 import authService from "../services/authService";
+import { isJwtExpired } from "../utils/tokens";
 
 const AuthContext = createContext({
   isAuthenticated: false,
   login: () => {},
   signUp: () => {},
   logout: () => {}
-})
+});
 
 /**
  * Provider that provides user authentication information.
@@ -22,7 +23,17 @@ export function AuthProvider({
   postAuth = () => {},
   postLogout = () => {}
 }) {
-  const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem(JWT));
+  const [isAuthenticated, setIsAuthenticated] = useState(function () {
+    const token = localStorage.getItem(JWT);
+
+    if (!token) return false;
+  
+    const isExpired = isJwtExpired(token);
+
+    if (isExpired) localStorage.removeItem(JWT);
+
+    return !isExpired;
+  }());
   const navigate = useNavigate();
   const navigateHome = () => {
     navigate("/", { replace: true });    
