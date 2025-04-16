@@ -13,6 +13,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import CoursesDetail from "./pages/CoursesDetail";
 import AssignmentsDetail from "./pages/AssignmentsDetail";
 import MaterialDetail from "./pages/MaterialDetail";
+import CalendarPage from "./pages/CalendarPage";
 import { isJwtExpired } from "./utils/tokens";
 
 function App() {
@@ -59,6 +60,7 @@ function App() {
                   path="/courses/:courseId/assignments/:assignmentId"
                   element={<AssignmentsDetail />}
                 />
+                <Route path="/calendar" element={<CalendarPage />} />
               </Route>
             </Routes>
 

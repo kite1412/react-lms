@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import MateriIcon from "../assets/book.svg?react";
 import AssigmentIcon from "../assets/clipboard-assigment.svg?react";
 import assignmentService from "../services/assignmentService";
+import formatDate from "../utils/formatDate";
 
 function ForumsTab() {
   const { id } = useParams();
@@ -29,6 +30,7 @@ function ForumsTab() {
     );
 
   const forums = assignments.map((item) => ({
+    key: item.assignment_id,
     id: item.assignment_id,
     title: item.title,
     dueDate: item.deadline,
@@ -49,7 +51,9 @@ function ForumsTab() {
             </div>
             <div className="flex flex-col">
               <span className="font-medium text-lg">{item.title}</span>
-              <span className="text-sm text-gray-500">Due: {item.dueDate}</span>
+              <span className="text-sm text-gray-500">
+                Due: {formatDate(item.dueDate)}
+              </span>
             </div>
           </Link>
         ))}
@@ -64,7 +68,7 @@ function ForumsTab() {
               <div key={item.assignment_id} className="mb-3">
                 <p className="text-sm text-red-500 font-medium">Deadline</p>
                 <p className="text-sm text-gray-700">
-                  {item.dueDate} - {item.title}
+                  {formatDate(item.dueDate)} - {item.title}
                 </p>
               </div>
             ))
