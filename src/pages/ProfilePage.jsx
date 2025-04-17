@@ -87,6 +87,13 @@ function AccountSettings({
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const updatePassword = useMutation({
+    mutationFn: () => userService.updateMyPassword({
+      current_password: currentPassword,
+      new_password: newPassword,
+      confirm_password: confirmPassword
+    })
+  });
   const section = (name) => <p className="font-bold text-2xl">
     {name}
   </p>;
@@ -136,7 +143,7 @@ function AccountSettings({
               />
               <Button 
                 action={"Save Changes"}
-                onClick={() => {}}
+                onClick={() => updatePassword.mutate()}
               />
             </div>
           </div>
