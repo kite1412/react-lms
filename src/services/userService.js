@@ -57,6 +57,16 @@ class UserService {
       throw error.response?.data || error;
     }
   }
+
+  async getMyInfo() {
+    try {
+      const res = await API.get("/users/me");
+
+      return res.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
+  }
 }
 
 export default new UserService();

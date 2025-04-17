@@ -14,6 +14,7 @@ import CoursesDetail from "./pages/CoursesDetail";
 import AssignmentsDetail from "./pages/AssignmentsDetail";
 import MaterialDetail from "./pages/MaterialDetail";
 import { isJwtExpired } from "./utils/tokens";
+import ProfilePage from "./pages/ProfilePage";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(function () {
@@ -58,6 +59,10 @@ function App() {
                 <Route
                   path="/courses/:courseId/assignments/:assignmentId"
                   element={<AssignmentsDetail />}
+                />
+                <Route 
+                  path="profile"
+                  element={<ProfilePage />}
                 />
               </Route>
             </Routes>

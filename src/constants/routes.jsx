@@ -7,5 +7,5 @@ export const routes = [
   { name: "Dashboard", path: "/", icon: <DashboardIcon /> },
   { name: "Courses", path: "/courses", icon: <CourseIcon /> },
   { name: "Calendar", path: "/calendar", icon: <CalendarIcon /> },
-  { name: "Communication", path: "/communication", icon: <ChatIcon /> }
+  { name: "Profile", path: "/profile", icon: <ChatIcon /> }
 ];
