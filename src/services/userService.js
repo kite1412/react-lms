@@ -57,6 +57,24 @@ class UserService {
       throw error.response?.data || error;
     }
   }
+
+  async updateMyName(newName) {
+    try {
+      const res = await API.patch("/users/me/name", newName);
+      return res.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
+  }
+
+  async updateMyPassword(newPasswordData) {
+    try {
+      const res = await API.patch("/users/me/password", newPasswordData);
+      return res.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
+  }
 }
 
 export default new UserService();
