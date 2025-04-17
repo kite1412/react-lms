@@ -70,7 +70,7 @@ class UserService {
 
   async updateMyName(newName) {
     try {
-      const res = await API.patch("/users/me/name", newName);
+      const res = await API.patch("/users/me/name", { new_name: newName });
       return res.data;
     } catch (error) {
       throw error.response?.data || error;

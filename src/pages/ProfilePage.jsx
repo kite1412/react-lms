@@ -1,8 +1,8 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import ContentLayout from "../layouts/ContentLayout";
 import userService from "../services/userService";
 import pp from "../assets/ice_bear.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Eye from "../assets/eye-fill.svg?react";
 import EyeSlash from "../assets/eye-slash-fill.svg?react";
 import { useAuth } from "../contexts/AuthContext";
@@ -10,9 +10,22 @@ import { useAuth } from "../contexts/AuthContext";
 function ProfilePage() {
   const { data, isPending } = useQuery({
     queryKey: ["my-info"],
-    queryFn: () => userService.getMyInfo().then(res => res.data)
+    queryFn: async () => await userService.getMyInfo(),
+    onSuccess: data => {
+      setName(data.data.name);
+    }
+  });
+  const [name, setName] = useState("");
+  const updateUsername = useMutation({
+    mutationFn: () => userService.updateMyName(name)
   });
   const { logout } = useAuth();
+
+  useEffect(() => {
+    if (data) {
+      setName(data.data.name);
+    }
+  }, [data])
 
   return !isPending ? <ContentLayout
     menu={"PROFILE"}
@@ -44,7 +57,11 @@ function ProfilePage() {
         <div className="flex flex-col gap-4">
           <hr />
           <ConsumePadding>
-            <AccountSettings />
+            <AccountSettings
+              name={name}
+              setName={setName}
+              onUpdateUsernameClick={() => updateUsername.mutate()}
+            />
           </ConsumePadding>
         </div>
       </div>
@@ -62,8 +79,11 @@ function ConsumePadding({
   </div>;
 }
 
-function AccountSettings() {
-  const [fullName, setFullName] = useState("");
+function AccountSettings({
+  name,
+  setName,
+  onUpdateUsernameClick
+}) {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -78,14 +98,14 @@ function AccountSettings() {
         <div className="flex flex-col gap-10 flex-3/4">
           <div className="flex flex-col gap-4 items-start">
             <Field 
-              value={fullName}
-              setValue={setFullName}
+              value={name}
+              setValue={setName}
               placeholder={"Full Name"}
               label={"Full Name"}
             />
             <Button 
               action={"Save Changes"}
-              onClick={() => {}}
+              onClick={onUpdateUsernameClick}
             />
           </div>
           {section("Change Password")}
