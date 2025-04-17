@@ -3,7 +3,7 @@ import { JWT } from "../constants/auth";
 
 const API = axios.create({
   baseURL: "http://localhost:5001",
-  withCredentials: true
+  withCredentials: true,
 });
 
 API.interceptors.request.use((config) => {

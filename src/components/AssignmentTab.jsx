@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useParams, Link } from "react-router-dom";
 import AssigmentIcon from "../assets/clipboard-assigment.svg?react";
 import assignmentService from "../services/assignmentService";
+import formatDate from "../utils/formatDate";
 
 function AssignmentTab() {
   const { id } = useParams();
@@ -28,6 +29,7 @@ function AssignmentTab() {
     );
 
   const assignmentList = assignments.map((item) => ({
+    key: item.assignment_id,
     id: item.assignment_id,
     title: item.title,
     dueDate: item.deadline,
@@ -48,13 +50,13 @@ function AssignmentTab() {
             <div className="flex flex-col">
               <span className="font-medium text-lg">{item.title}</span>
               <span className="text-sm text-gray-500 flex items-center">
-                Due: {item.dueDate}
+                Due: {formatDate(item.dueDate)}
               </span>
             </div>
           </Link>
         ))
       ) : (
-        <div className="text-gray-500 mt-4">Belum ada tugas.</div>
+        <div className="text-gray-500 mt-4">No Assignment</div>
       )}
     </div>
   );

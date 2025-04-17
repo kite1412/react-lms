@@ -63,6 +63,15 @@ class CourseService {
       throw error.response?.data || error;
     }
   }
+
+  async getAllConentsByCourseId(courseId) {
+    try {
+      const res = await API.get(`/courses/contents/${courseId}`);
+      return res.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
+  }
 }
 
 export default new CourseService();
