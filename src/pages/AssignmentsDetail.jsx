@@ -35,7 +35,7 @@ function AssignmentDetail() {
   // Get my submission
   const { data: mySubmission, isLoading: loadingSubmission } = useQuery({
     queryKey: ["my-submission", assignmentId],
-    queryFn: () => SubmissionService.getMySubmission(assignmentId),
+    queryFn: async () => await SubmissionService.getMySubmission(assignmentId),
   });
 
   // Create submission
