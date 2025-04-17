@@ -5,12 +5,14 @@ import pp from "../assets/ice_bear.png";
 import { useState } from "react";
 import Eye from "../assets/eye-fill.svg?react";
 import EyeSlash from "../assets/eye-slash-fill.svg?react";
+import { useAuth } from "../contexts/AuthContext";
 
 function ProfilePage() {
   const { data, isPending } = useQuery({
     queryKey: ["my-info"],
     queryFn: () => userService.getMyInfo().then(res => res.data)
   });
+  const { logout } = useAuth();
 
   return !isPending ? <ContentLayout
     menu={"PROFILE"}
@@ -33,6 +35,7 @@ function ProfilePage() {
                 text-red-500 px-6 py-3 bg-white rounded-[8px] font-bold 
                 cursor-pointer hover:bg-white/90  
               `}
+              onClick={() => logout()}
             >
               Log Out
             </button>

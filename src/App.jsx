@@ -61,7 +61,7 @@ function App() {
                   element={<AssignmentsDetail />}
                 />
                 <Route 
-                  path="profile"
+                  path="/profile"
                   element={<ProfilePage />}
                 />
               </Route>
