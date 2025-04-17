@@ -15,13 +15,16 @@ import AssignmentsDetail from "./pages/AssignmentsDetail";
 import MaterialDetail from "./pages/MaterialDetail";
 import CalendarPage from "./pages/CalendarPage";
 import { isJwtExpired } from "./utils/tokens";
+import AttendancePage from "./pages/AttencanceDetail";
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(function () {
-    const jwt = localStorage.getItem(JWT);
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    (function () {
+      const jwt = localStorage.getItem(JWT);
 
-    return jwt !== undefined && jwt !== null && !isJwtExpired(jwt);
-  }());
+      return jwt !== undefined && jwt !== null && !isJwtExpired(jwt);
+    })()
+  );
   const hideUnauthenticated = `${!isAuthenticated && "hidden"}`;
   const queryClient = new QueryClient();
 
@@ -61,6 +64,10 @@ function App() {
                   element={<AssignmentsDetail />}
                 />
                 <Route path="/calendar" element={<CalendarPage />} />
+                <Route
+                  path="/courses/:courseId/attendances/:attendanceId"
+                  element={<AttendancePage />}
+                />
               </Route>
             </Routes>
 

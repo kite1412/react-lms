@@ -8,43 +8,44 @@ const AuthContext = createContext({
   isAuthenticated: false,
   login: () => {},
   signUp: () => {},
-  logout: () => {}
+  logout: () => {},
 });
 
 /**
  * Provider that provides user authentication information.
- * @param {ReactNode} children - Content inside this provider  
- * @param {() => void} postAuth - Callback function after successfully signed in  
+ * @param {ReactNode} children - Content inside this provider
+ * @param {() => void} postAuth - Callback function after successfully signed in
  * @param {() => void} postLogout - Callback function after successfully logged out
  * @returns {JSX.Element}
  */
-export function AuthProvider({ 
+export function AuthProvider({
   children,
   postAuth = () => {},
-  postLogout = () => {}
+  postLogout = () => {},
 }) {
-  const [isAuthenticated, setIsAuthenticated] = useState(function () {
-    const token = localStorage.getItem(JWT);
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    (function () {
+      const token = localStorage.getItem(JWT);
 
-    if (!token) return false;
-  
-    const isExpired = isJwtExpired(token);
+      if (!token) return false;
 
-    if (isExpired) localStorage.removeItem(JWT);
+      const isExpired = isJwtExpired(token);
 
-    return !isExpired;
-  }());
+      if (isExpired) localStorage.removeItem(JWT);
+
+      return !isExpired;
+    })()
+  );
   const navigate = useNavigate();
   const navigateHome = () => {
-    navigate("/", { replace: true });    
+    navigate("/", { replace: true });
   };
 
   const login = async (email, password, callback) => {
     const res = await authService.login({
       email: email,
-      password: password
+      password: password,
     });
-    console.log(res);
 
     if (res && res.success) {
       localStorage.setItem(JWT, res.data.token);
@@ -56,23 +57,22 @@ export function AuthProvider({
     }
 
     callback(false);
-  }
+  };
 
   const logout = () => {
     // userService.logout();
     // setIsAuthenticated(false);
     // navigate("/login", { replace: true });
     // postLogout();
-  }
+  };
 
   return (
-    <AuthContext.Provider 
+    <AuthContext.Provider
       value={{
         isAuthenticated: isAuthenticated,
         login: login,
-        logout: logout
-      }}
-    >
+        logout: logout,
+      }}>
       {children}
     </AuthContext.Provider>
   );
