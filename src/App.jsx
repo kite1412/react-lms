@@ -1,19 +1,20 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import ProtectedRoute from "./routes/ProtectedRoute";
-import { AuthProvider } from "./contexts/AuthContext";
-import LoginPage from "./pages/LoginPage";
-import { JWT } from "./constants/auth";
-import DashboardPage from "./pages/DashboardPage";
-import SideNavBar from "./components/SideNavBar";
-import CoursesPage from "./pages/CoursesPage";
-import TopBar from "./components/TopBar";
-import BottomNavBar from "./components/BottomNavBar";
-import { useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import CoursesDetail from "./pages/CoursesDetail";
+import { useState } from "react";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import BottomNavBar from "./components/BottomNavBar";
+import SideNavBar from "./components/SideNavBar";
+import TopBar from "./components/TopBar";
+import { JWT } from "./constants/auth";
+import { AuthProvider } from "./contexts/AuthContext";
 import AssignmentsDetail from "./pages/AssignmentsDetail";
-import MaterialDetail from "./pages/MaterialDetail";
 import CalendarPage from "./pages/CalendarPage";
+import CoursesDetail from "./pages/CoursesDetail";
+import CoursesPage from "./pages/CoursesPage";
+import DashboardPage from "./pages/DashboardPage";
+import LoginPage from "./pages/LoginPage";
+import MaterialDetail from "./pages/MaterialDetail";
+import ProfilePage from "./pages/ProfilePage";
+import ProtectedRoute from "./routes/ProtectedRoute";
 import { isJwtExpired } from "./utils/tokens";
 import AttendancePage from "./pages/AttencanceDetail";
 
@@ -63,6 +64,10 @@ function App() {
                   path="/courses/:courseId/assignments/:assignmentId"
                   element={<AssignmentsDetail />}
                 />
+                <Route 
+                  path="/profile"
+                  element={<ProfilePage />}
+                />
                 <Route path="/calendar" element={<CalendarPage />} />
                 <Route
                   path="/courses/:courseId/attendances/:attendanceId"
@@ -70,7 +75,6 @@ function App() {
                 />
               </Route>
             </Routes>
-
             <BottomNavBar className={`md:hidden ${hideUnauthenticated}`} />
           </div>
         </AuthProvider>

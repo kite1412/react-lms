@@ -59,12 +59,18 @@ export function AuthProvider({
     callback(false);
   };
 
-  const logout = () => {
-    // userService.logout();
-    // setIsAuthenticated(false);
-    // navigate("/login", { replace: true });
-    // postLogout();
-  };
+  const logout = async () => {
+    try {
+      // try to remove the cookie
+      await authService.logout();
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setIsAuthenticated(false);
+      localStorage.removeItem(JWT);
+      postLogout();
+    }
+  }
 
   return (
     <AuthContext.Provider

@@ -46,12 +46,40 @@ class UserService {
     }
   }
 
+  async getMyInfo() {
+    try {
+      const res = await API.get("/users/me");
+
+      return res.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
+  }
+
   async updateUserPassword(userId, newPassword) {
     try {
       const res = await API.patch(
         `/users/update-password/${userId}`,
         newPassword
       );
+      return res.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
+  }
+
+  async updateMyName(newName) {
+    try {
+      const res = await API.patch("/users/me/name", { new_name: newName });
+      return res.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
+  }
+
+  async updateMyPassword(newPasswordData) {
+    try {
+      const res = await API.patch("/users/me/password", newPasswordData);
       return res.data;
     } catch (error) {
       throw error.response?.data || error;
