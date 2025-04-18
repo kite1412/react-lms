@@ -16,13 +16,16 @@ import MaterialDetail from "./pages/MaterialDetail";
 import ProfilePage from "./pages/ProfilePage";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import { isJwtExpired } from "./utils/tokens";
+import AttendancePage from "./pages/AttencanceDetail";
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(function () {
-    const jwt = localStorage.getItem(JWT);
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    (function () {
+      const jwt = localStorage.getItem(JWT);
 
-    return jwt !== undefined && jwt !== null && !isJwtExpired(jwt);
-  }());
+      return jwt !== undefined && jwt !== null && !isJwtExpired(jwt);
+    })()
+  );
   const hideUnauthenticated = `${!isAuthenticated && "hidden"}`;
   const queryClient = new QueryClient();
 
@@ -66,6 +69,10 @@ function App() {
                   element={<ProfilePage />}
                 />
                 <Route path="/calendar" element={<CalendarPage />} />
+                <Route
+                  path="/courses/:courseId/attendances/:attendanceId"
+                  element={<AttendancePage />}
+                />
               </Route>
             </Routes>
             <BottomNavBar className={`md:hidden ${hideUnauthenticated}`} />

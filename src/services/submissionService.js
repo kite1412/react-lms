@@ -21,7 +21,7 @@ class SubmissionService {
 
   async getMySubmission(assignmentId) {
     try {
-      const res = await API.get(`/submissions/my-submissions/${assignmentId}`);
+      const res = await API.get(`/submissions/my-submission/${assignmentId}`);
       return res.data;
     } catch (error) {
       throw error.response?.data || error;
